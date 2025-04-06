@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from decimal import Decimal
 
 
 @dataclass(frozen=True)
@@ -28,3 +29,19 @@ class Address:
     state: str
     country: str
     area_code: str
+
+
+@dataclass
+class Price:
+    '''
+    Price dataclass for the Ayush module. Immutable type
+
+    Attributes
+    ----------
+    currency: str
+        eg. "INR" (enum-style restricted-string list)
+    amount: Decimal
+        eg. 1000.05
+    '''
+    currency: str
+    amount: Decimal
