@@ -1,0 +1,18 @@
+[project]
+name = "ayush"
+version = "0.1.0"
+description = "Core package of Ayush HMS system. Contains 1st-class-object definitions used by Ayush services"
+readme = "README.md"
+
+authors = [
+    {name = "Kishalay Kundu", email = "kishalay.kundu@gmail.com"}
+]
+
+requires-python = "==3.13"
+
+dependencies = [
+    "phonenumbers>=9,<10"
+]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
