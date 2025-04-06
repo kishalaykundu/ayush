@@ -6,6 +6,10 @@ T = TypeVar("T")
 
 
 class Task(Generic[T], ABC):
+    '''
+    Abstract unit of work pattern that bridges the repository layer and the service layer.
+    This is an abstraction of abstract classes to join concrete repository to conrete service.
+    '''
     def __init__(self, db: T):
         self._db = db
 
