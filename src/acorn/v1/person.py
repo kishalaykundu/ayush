@@ -2,69 +2,12 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from datetime import datetime
 from phonenumbers import PhoneNumber
+from typing import Optional
 
 from acorn.v1.datatypes import Address
 
 
 class Person(ABC):
-    '''
-    Abstract person class for Ayush. All humans in the system have the following attributes.
-    Specific classes derived from this abstract classes include User, Personnel, Physician etc.
-    - each with their own set of restrictions
-
-    Attributes
-    ----------
-    name: str
-        Name of the person (mutable)
-        NOTE: We don't use the often-used anti-pattern of breaking a person's name into first-name, middle-
-        name, last-name etc. as it is not a universal format
-    phone: PhoneNumber
-        Person's phone-number (mutable)
-
-    Properites
-    ----------
-    name: str
-        Gets/sets name
-    phone: PhoneNumber
-        Gets/sets phone number
-
-    Abstract methods
-    ----------------
-    def __eq___(Person) -> bool
-        Defintion of object equality/equivalence for Person class
-    def __hash__()
-        Definition of unique object identity
-    '''
-    def __init__(self, name: str, phone: PhoneNumber):
-        '''
-        Parameters
-        ----------
-        name: str
-            Person's name
-        phone: PhoneNumber
-            Person's phonenumber (Google's PhoneNumber class [pypi])
-        '''
-        self._name = name
-        self._phone = phone
-
-    @property
-    def name(self) -> str:
-        return self._name
-
-    @name.setter
-    def name(self, name: str):
-        self._name = name
-
-    @abstractmethod
-    def __eq__(self, person):
-        raise NotImplementedError()
-
-    @abstractmethod
-    def __hash__(self):
-        raise NotImplementedError()
-
-
-class VerbosePerson(Person, ABC):
     '''
     Abstract verbose-person class for Ayush. This class contains extra information for the person
     including gender, date-of-birth and address
@@ -95,8 +38,21 @@ class VerbosePerson(Person, ABC):
         Gets/sets phone number (from parent Person class)
     address: Address
         Gets/sets address
+
+    Abstract methods
+    ----------------
+    def __eq___(Person) -> bool
+        Defintion of object equality/equivalence for Person class
+    def __hash__()
+        Definition of unique object identity
     '''
-    def __init__(self, name: str, gender: str, dob: datetime, phone: PhoneNumber, address: Address):
+    def __init__(self,
+        name: Optional[str] = None,
+        gender: Optional[str] = None,
+        dob: Optional[datetime] = None,
+        phone: Optional[PhoneNumber] = None,
+        email: Optional[str] = None,
+        address: Optional[Address] = None):
         '''
         Parameters
         ----------
@@ -108,29 +64,108 @@ class VerbosePerson(Person, ABC):
             Person's date-of-birth
         phone: PhoneNumber
             Person's phonenumber (Google's PhoneNumber class [pypi])
+        email: str
+            Email-id of a person
         address: Address
             Person's address
         '''
-        super().__init__(name, phone)
+        self._name = name
         self._gender = gender
         self._dob = dob
+        self._phone = phone
+        self._email = email
         self._address = address
 
     @property
-    def gender(self) -> str:
-        return self._gender
-
-    @property
-    def dob(self) -> datetime:
-        return self._dob
-
-    @property
-    def address(self) -> Address:
+    def address(self) -> Optional[Address]:
         return self._address
 
     @address.setter
     def address(self, address: Address):
         self._address = address
+
+    @property
+    def gender(self) -> Optional[str]:
+        return self._gender
+
+    @property
+    def dob(self) -> Optional[datetime]:
+        return self._dob
+
+    @property
+    def email(self) -> Optional[str]:
+        return self._email
+
+    @email.setter
+    def email(self, email: str):
+        self._email = email
+
+    @property
+    def name(self) -> Optional[str]:
+        return self._name
+
+    @name.setter
+    def name(self, name: str):
+        self._name = name
+
+    @property
+    def phone(self) -> Optional[PhoneNumber]:
+        return self._phone
+
+    @phone.setter
+    def phone(self, phone: PhoneNumber):
+        self._phone = phone
+
+    @abstractmethod
+    def __eq__(self, person):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def __hash__(self):
+        raise NotImplementedError()
+
+
+class Indian(Person, ABC):
+    def __init__(self,
+        name: Optional[str] = None,
+        gender: Optional[str] = None,
+        dob: Optional[datetime] = None,
+        phone: Optional[PhoneNumber] = None,
+        email: Optional[str] = None,
+        address: Optional[Address] = None,
+        aadhaar: Optional[int] = None,
+        pan: Optional[str] = None):
+        '''
+        Parameters
+        ----------
+        name: str
+            Person's name
+        gender: str
+            Person's gender
+        dob: datetime
+            Person's date-of-birth
+        phone: PhoneNumber
+            Person's phonenumber (Google's PhoneNumber class [pypi])
+        email: str
+            Email-id of a person
+        address: Address
+            Person's address
+        aadhaar: int
+            Aadhaar Number of an Indian
+        pan: str
+            PAN Number of an Indian
+        '''
+        super().__init__(name, gender, dob, phone, email, address)
+        self._aadhaar = aadhaar
+        self._pan = pan
+
+    @property
+    def aadhaar(self) -> Optional[int]:
+        return self._aadhaar
+
+    @property
+    def pan(self) -> Optional[str]:
+        return self._pan
 
     @abstractmethod
     def __eq__(self, person):
