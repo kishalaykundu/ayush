@@ -1,0 +1,10 @@
+# Include important files
+include README.md
+include LICENSE
+include src/ayush_datatypes/py.typed
+
+# Exclude development and build files
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
+
