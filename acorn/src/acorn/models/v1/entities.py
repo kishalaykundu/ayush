@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List, Optional
 # local
-from acorn.t1.staff import Employee
+from acorn.models.v1.staff import Employee
 
 
 class Department():

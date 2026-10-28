@@ -8,12 +8,12 @@ def verify_installation() -> bool:
     """Verify that the package is properly installed."""
     success = True
     
-    print("Verifying admin_datatypes installation...")
+    print("Verifying acorn installation...")
     print("-" * 50)
     
     # Test 1: Import package
     try:
-        import admin_datatypes
+        import acorn
         print("✓ Package import successful")
     except ImportError as e:
         print(f"✗ Package import failed: {e}")
@@ -22,7 +22,7 @@ def verify_installation() -> bool:
     
     # Test 2: Check version
     try:
-        version = admin_datatypes.__version__
+        version = acorn.__version__
         print(f"✓ Version: {version}")
     except AttributeError:
         print("✗ Version attribute not found")
@@ -30,7 +30,7 @@ def verify_installation() -> bool:
     
     # Test 3: Check __all__
     try:
-        all_exports = admin_datatypes.__all__
+        all_exports = acorn.__all__
         print(f"✓ Exports (__all__): {all_exports}")
     except AttributeError:
         print("✗ __all__ attribute not found")
@@ -38,7 +38,7 @@ def verify_installation() -> bool:
     
     # Test 4: Check models module
     try:
-        from admin_datatypes import models
+        from acorn import models
         print("✓ Models module import successful")
     except ImportError as e:
         print(f"✗ Models module import failed: {e}")
@@ -46,10 +46,10 @@ def verify_installation() -> bool:
     
     # Test 5: Check py.typed marker
     try:
-        import admin_datatypes
+        import acorn
         import pathlib
         
-        package_path = pathlib.Path(admin_datatypes.__file__).parent
+        package_path = pathlib.Path(acorn.__file__).parent
         py_typed_path = package_path / "py.typed"
         
         if py_typed_path.exists():
@@ -74,4 +74,3 @@ def verify_installation() -> bool:
 if __name__ == "__main__":
     success = verify_installation()
     sys.exit(0 if success else 1)
-

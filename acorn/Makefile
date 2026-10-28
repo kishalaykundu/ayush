@@ -22,7 +22,7 @@ test:
 	pytest -v
 
 test-cov:
-	pytest --cov=ayush_datatypes --cov-report=html --cov-report=term
+	pytest --cov=acorn --cov-report=html --cov-report=term
 
 lint:
 	ruff check src/ tests/

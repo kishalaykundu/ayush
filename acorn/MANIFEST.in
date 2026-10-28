@@ -1,7 +1,7 @@
 # Include important files
 include README.md
 include LICENSE
-include src/admin_datatypes/py.typed
+include src/acorn/py.typed
 
 # Exclude development and build files
 global-exclude __pycache__

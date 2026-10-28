@@ -4,7 +4,7 @@ from phonenumbers import PhoneNumber
 from typing import Optional
 # local
 from acorn.v1.datatypes import Address
-from acorn.v1.person import Indian
+from acorn.models.v1.person import Indian
 
 
 class Patient(Indian):
